@@ -1,4 +1,6 @@
 Stanceshare::Application.routes.draw do
+  resources :parts
+
   devise_for :users
   root "pages#home"
 
