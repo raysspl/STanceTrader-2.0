@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Description</th>
+      <th>User</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,14 +15,18 @@
     <% @parts.each do |part| %>
       <tr>
         <td><%= part.description %></td>
-        <td><%= link_to 'Show', part %></td>
-        <td><%= link_to 'Edit', edit_part_path(part) %></td>
-        <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= part.user.email if part.user %></td>
+        <td><%= link_to 'Show', part_path(part) %></td>
+        <% if part.user == current_user %>
+          <td><%= link_to 'Edit', edit_part_path(part) %></td>
+          <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Part', new_part_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Part', new_part_path %>
+<% end %>

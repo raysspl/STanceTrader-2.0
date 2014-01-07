@@ -1,5 +1,6 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @parts = Part.all
@@ -9,14 +10,14 @@ class PartsController < ApplicationController
   end
 
   def new
-    @part = Part.new
+    @part = current_user.parts.build
   end
 
   def edit
   end
 
   def create
-    @part = Part.new(part_params)
+    @part = current_user.parts.build(part_params)
       if @part.save
         redirect_to @part, notice: 'Part was successfully created.' 
       else
@@ -26,7 +27,7 @@ class PartsController < ApplicationController
 
     def update
       if @part.update(part_params)
-        redirect_to @part, notice: 'Part was successfully updated.' }
+        redirect_to @part, notice: 'Part was successfully updated.' 
       else
         render action: 'edit' 
       end
@@ -43,8 +44,13 @@ class PartsController < ApplicationController
       @part = Part.find(params[:id])
     end
 
+    def correct_user
+      @part = current_user.parts.find_by(id: params[:id])
+      redirect_to parts_path, notice: "Yooo, you not allowed to do that son!" if @part.nil?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_params
-      params.require(:part).permit(:description)
+      params.require(:part).permit(:description, :image)
     end
 end
