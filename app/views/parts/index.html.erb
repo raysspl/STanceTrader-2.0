@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Description</th>
       <th>User</th>
       <th></th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @parts.each do |part| %>
       <tr>
+        <td><%= image_tag part.image.url(:medium) %></td>
         <td><%= part.description %></td>
         <td><%= part.user.email if part.user %></td>
         <td><%= link_to 'Show', part_path(part) %></td>

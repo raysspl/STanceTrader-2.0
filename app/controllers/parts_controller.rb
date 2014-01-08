@@ -18,20 +18,20 @@ class PartsController < ApplicationController
 
   def create
     @part = current_user.parts.build(part_params)
-      if @part.save
-        redirect_to @part, notice: 'Part was successfully created.' 
-      else
-        render action: 'new' 
-      end
+    if @part.save
+      redirect_to @part, notice: 'Part was successfully created.' 
+    else
+     render action: 'new' 
     end
+  end
 
-    def update
-      if @part.update(part_params)
-        redirect_to @part, notice: 'Part was successfully updated.' 
-      else
-        render action: 'edit' 
-      end
+  def update
+    if @part.update(part_params)
+      redirect_to @part, notice: 'Part was successfully updated.' 
+    else
+      render action: 'edit' 
     end
+  end
 
   def destroy
     @part.destroy
