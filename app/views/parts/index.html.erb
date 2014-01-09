@@ -1,34 +1,17 @@
-<h1>Listing parts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Description</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @parts.each do |part| %>
-      <tr>
-        <td><%= image_tag part.image.url(:medium) %></td>
-        <td><%= part.description %></td>
-        <td><%= part.user.email if part.user %></td>
-        <td><%= link_to 'Show', part_path(part) %></td>
+<div id="parts" class="transitions-enabled">
+  <% @parts.each do |part| %>
+    <div class="box panel panel-default">
+      <%= image_tag part.image.url(:medium) %>
+      <div class="panel-body">
+        <%= part.description %>
+        <%= part.user.email if part.user %>
+        <%= link_to 'Show', part_path(part) %>
         <% if part.user == current_user %>
-          <td><%= link_to 'Edit', edit_part_path(part) %></td>
-          <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= link_to 'Edit', edit_part_path(part) %>
+          <%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </div>
+     </div> 
+  <% end %>
+</div>
 
-<br>
-<% if user_signed_in? %>
-  <%= link_to 'New Part', new_part_path %>
-<% end %>
