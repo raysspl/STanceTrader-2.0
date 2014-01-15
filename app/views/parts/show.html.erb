@@ -1,11 +1,20 @@
-<%= image_tag @part.image.url %>
-
-<p>
-  <strong>Description:</strong>
-  <%= @part.description %>
-</p>
-
-<% if @part.user == current_user %>
-	<%= link_to 'Edit', edit_part_path(@part) %> |
-<% end %>
 <%= link_to 'Back', parts_path %>
+
+<div class="row">
+	<div class="col-md-offset-2 col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading center">
+				<%= image_tag @part.image.url(:medium) %>
+			</div>
+			<div class="panel-body">
+				<p><%= @part.description %></p>
+				<p><strong><%= @part.user.email if @part.user %></strong></p>
+
+				<% if @part.user == current_user %>
+					<%= link_to 'Edit', edit_part_path(@part) %>
+				<% end %>
+
+			</div>
+		</div>
+	</div>
+</div>

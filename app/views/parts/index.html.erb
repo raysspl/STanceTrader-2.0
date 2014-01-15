@@ -1,14 +1,16 @@
 <div id="parts" class="transitions-enabled">
   <% @parts.each do |part| %>
     <div class="box panel panel-default">
-      <%= image_tag part.image.url(:medium) %>
+      <%= link_to image_tag(part.image.url(:medium)), part %>
       <div class="panel-body">
         <%= part.description %>
         <%= part.user.email if part.user %>
-        <%= link_to 'Show', part_path(part) %>
+        <strong><%= part.user.email if part.user %></strong>
         <% if part.user == current_user %>
-          <%= link_to 'Edit', edit_part_path(part) %>
-          <%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <div class="actions">
+            <%= link_to 'Edit', edit_part_path(part) %>
+            <%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
         <% end %>
       </div>
      </div> 
