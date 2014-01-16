@@ -11,8 +11,10 @@
 				<p><strong><%= @part.user.email if @part.user %></strong></p>
 
 				<% if @part.user == current_user %>
-					<%= link_to 'Edit', edit_part_path(@part) %>
-				<% end %>
+					<%= link_to edit_part_path(@part) do %>
+						<span class="glyphicon glyphicon-edit"></span>
+						Edit
+					<% end %>
 
 			</div>
 		</div>
