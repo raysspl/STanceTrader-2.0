@@ -2,8 +2,7 @@ Stanceshare::Application.routes.draw do
   resources :parts
 
   devise_for :users
-  root "pages#home"
-
+  root "parts#index"
   get "about" => "pages#about" # creates about path
 
   # The priority is based upon order of creation: first created -> highest priority.
